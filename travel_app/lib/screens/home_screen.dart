@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/screens/search_screen.dart';
+import 'package:travel_app/screens/settings_screen.dart';
 import 'package:travel_app/utils/constants/image_string.dart';
 import 'package:travel_app/utils/destination_data.dart';
 
@@ -35,6 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.language),
             onPressed: () {
               
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              // Navigate to settings screen
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const SettingsScreen(),
+                ),
+              );
             },
           ),
         ],
