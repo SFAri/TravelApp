@@ -29,7 +29,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
           destinations: [
             NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
             NavigationDestination(icon: Icon(Icons.category), label: 'Category'),
-            NavigationDestination(icon: Icon(Icons.account_box), label: 'Profile'),
           ]
         ),
       body: SafeArea(child: _getBody()),
@@ -42,8 +41,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
         return HomeScreen(); // Màn hình chính
       case 1:
         return CategoryScreen(); // Màn hình danh mục
-      case 2:
-        return Container(color: Colors.blue); // Màn hình hồ sơ
       default:
         return Container();
     }

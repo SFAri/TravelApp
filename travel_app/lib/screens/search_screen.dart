@@ -3,8 +3,8 @@ import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/utils/destination_data.dart';
 
 class SearchScreen extends StatefulWidget {
-
-  const SearchScreen({super.key});
+  final String query;
+  const SearchScreen({super.key, required this.query});
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -12,12 +12,12 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<Map<String, dynamic>> filteredDestinations = [];
-  String query = '';
 
   @override
   void initState() {
     super.initState();
-    filteredDestinations = destinations;
+    // Gọi hàm filter để lọc danh sách ngay khi khởi tạo
+    _filterDestinations(widget.query);
   }
 
   void _filterDestinations(String query) {
@@ -26,7 +26,6 @@ class _SearchScreenState extends State<SearchScreen> {
     }).toList();
 
     setState(() {
-      this.query = query;
       filteredDestinations = filtered;
     });
   }
@@ -46,28 +45,19 @@ class _SearchScreenState extends State<SearchScreen> {
           spacing: 10,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              spacing: 5,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 300,
-                  height: 50,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      )
-                    ),
-                    onChanged: _filterDestinations,
-                  ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  label: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  )
                 ),
-                IconButton(
-                  onPressed: (){}, 
-                  icon: Icon(Icons.search)
-                )
-              ],
+                onChanged: _filterDestinations,
+                initialValue: widget.query,
+              ),
             ),
 
             Row(
@@ -78,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ],
             ),
 
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
               child: filteredDestinations.isEmpty
                   ? Center(
@@ -93,7 +83,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         final destination = filteredDestinations[index];
                         return Card(
                           child: ListTile(
-                            leading: Image.asset(destination['imageUrl']),
+                            leading: SizedBox(width: 80, child: Image.asset(destination['imageUrl'])),
                             title: Text(destination['name']),
                             subtitle: Text(destination['description']),
                             trailing: Text('\$${destination['price']}'),

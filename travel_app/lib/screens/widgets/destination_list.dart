@@ -59,7 +59,10 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
                 final destination = filteredDestinations[index];
                 return Card(
                   child: ListTile(
-                    leading: Image.asset(destination['imageUrl']),
+                    leading: SizedBox(
+                      width: 80,
+                      child: Image.asset(destination['imageUrl'])
+                    ),
                     title: Text(destination['name']),
                     subtitle: Text(destination['description']),
                     trailing: Text('\$${destination['price']}'),

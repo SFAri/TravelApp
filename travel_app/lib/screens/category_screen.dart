@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/screens/widgets/destination_list.dart' show DestinationListWidget;
 import 'package:travel_app/utils/destination_data.dart';
 
@@ -16,7 +15,7 @@ class _CategoryScreenState extends State<CategoryScreen> with SingleTickerProvid
   @override
   void initState() {
     // TODO: implement initState
-    tabController = TabController(length: 6, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
     super.initState();
   }
 
@@ -60,7 +59,7 @@ class _CategoryScreenState extends State<CategoryScreen> with SingleTickerProvid
                     destinations: destinations.where((d) => d['category'] == 'Nature').toList(),
                   ),
                   DestinationListWidget(
-                    destinations: destinations.where((d) => d['category'] == 'Histotical Sites').toList(),
+                    destinations: destinations.where((d) => d['category'] == 'Historical').toList(),
                   ),
                   DestinationListWidget(
                     destinations: destinations.where((d) => d['category'] == 'Cultural').toList(),

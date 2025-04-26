@@ -17,12 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late CarouselSliderController controller;
   late int selected;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     selected = 0;
     controller = CarouselSliderController();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.dispose();
   }
 
   @override
@@ -51,10 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
               spacing: 5,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
+                SizedBox(
                   width: 300,
                   height: 50,
                   child: TextFormField(
+                    controller: _searchController,
                     decoration: InputDecoration(
                       hintText: 'Search',
                       border: OutlineInputBorder(
@@ -65,9 +73,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 IconButton(
                   onPressed: (){
+                    String searchValue = _searchController.text;
                     Navigator.push(
                       context, 
-                      MaterialPageRoute(builder: (context) => const SearchScreen()),
+                      MaterialPageRoute(builder: (context) => SearchScreen(query: searchValue)),
                     );
                   }, 
                   icon: Icon(Icons.search)
@@ -93,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: (){},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.daLat))
+                    child: Image(image: AssetImage(CImages.waterPuppetShow))
                   ),
                 ),
                 GestureDetector(
@@ -114,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: (){},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.phuQuoc))
+                    child: Image(image: AssetImage(CImages.baNa))
                   ),
                 ),
               ]
@@ -159,11 +168,14 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 350,
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                itemCount: destinations.length,
+                itemCount: 4,
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
-                      leading: Image.asset(destinations[index]['imageUrl']!),
+                      leading: SizedBox(
+                        width: 80,
+                        child: Image.asset(destinations[index]['imageUrl']!)
+                      ),
                       title: Text(destinations[index]['name']!),
                       subtitle: Text(destinations[index]['description']!),
                       onTap: () {
