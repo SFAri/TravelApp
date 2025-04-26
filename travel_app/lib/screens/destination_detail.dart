@@ -28,6 +28,7 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
             ),
             SizedBox(height: 16),
             Wrap(
+              spacing: 20,
               direction: Axis.horizontal,
               crossAxisAlignment: WrapCrossAlignment.center,
               alignment: WrapAlignment.spaceBetween,
