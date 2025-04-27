@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/screens/search_screen.dart';
 import 'package:travel_app/screens/settings_screen.dart';
@@ -8,9 +10,8 @@ import 'package:travel_app/utils/destination_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
-  final Function(Locale) onLocaleChanged; // Locale change callback
 
-  const HomeScreen({super.key, required this.onLocaleChanged});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -49,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _searchController.dispose();
   }
 
-  void _showLanguageSelectionDialog() {
+  void _showLanguageSelectionDialog(SettingsProvider settingsProvider) {
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? const Icon(Icons.check, color: Colors.blue)
                   : null,
                 onTap: () {
-                  widget.onLocaleChanged(const Locale('en')); // Change locale to English
+                  settingsProvider.changeLocale(const Locale('en')); // Change locale to English
                   Navigator.pop(context);
                 },
               ),
@@ -77,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? const Icon(Icons.check, color: Colors.blue)
                   : null,
                 onTap: () {
-                  widget.onLocaleChanged(const Locale('vi')); // Change locale to Vietnamese
+                  settingsProvider.changeLocale(const Locale('vi')); // Change locale to Vietnamese
                   Navigator.pop(context);
                 },
               ),
@@ -87,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? const Icon(Icons.check, color: Colors.blue)
                   : null,
                 onTap: () {
-                  widget.onLocaleChanged(const Locale('ja')); // Change locale to Japanese
+                  settingsProvider.changeLocale(const Locale('ja')); // Change locale to Japanese
                   Navigator.pop(context);
                 },
               ),
@@ -108,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
             icon: Icon(Icons.language),
             onPressed: () {
-              _showLanguageSelectionDialog();
+              _showLanguageSelectionDialog(context.read<SettingsProvider>());
             },
           ),
           IconButton(
@@ -118,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => SettingsScreen(onLocaleChanged: widget.onLocaleChanged),
+                  builder: (_) => SettingsScreen(),
                 ),
               );
             },

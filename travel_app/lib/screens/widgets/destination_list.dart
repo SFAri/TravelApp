@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/utils/formaters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,6 +37,9 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = context.watch<SettingsProvider>();
+    final selectedCurrency = settingsProvider.selectedCurrency;
+    final currentLocale = settingsProvider.appLocale;
     return Column(
       children: [
         Padding(
@@ -67,7 +72,13 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
                     ),
                     title: Text(destination['name']),
                     subtitle: Text(destination['description']),
-                    trailing: Text(Formatters.formatCurrency(destination['price'].toDouble(), Localizations.localeOf(context))),
+                    trailing: Text(
+                      Formatters.formatCurrency(
+                          Formatters.convertCurrency(destination['price'].toDouble(), selectedCurrency),
+                          selectedCurrency,
+                          currentLocale,
+                        )
+                      ),
                     onTap: () {
                       // Navigate to detail screen
                       Navigator.push(

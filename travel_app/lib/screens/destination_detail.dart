@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/utils/formaters.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -14,6 +16,9 @@ class DestinationDetailScreen extends StatefulWidget {
 class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = context.watch<SettingsProvider>();
+    final selectedCurrency = settingsProvider.selectedCurrency;
+    final currentLocale = settingsProvider.appLocale;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.destination['name']!),
@@ -53,7 +58,11 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
               children: [
                 Icon(Icons.new_releases_rounded, color: Colors.amberAccent,),
                 Text(
-                  Formatters.formatCurrency(widget.destination['price'].toDouble(), Localizations.localeOf(context)),
+                  Formatters.formatCurrency(
+                    Formatters.convertCurrency(widget.destination['price'].toDouble(), selectedCurrency),
+                    selectedCurrency,
+                    currentLocale,
+                    ),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
                 ),
               ],

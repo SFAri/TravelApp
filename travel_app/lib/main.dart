@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:travel_app/l10n/l10n.dart';
 import 'package:travel_app/screens/widgets/navigation_menu.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travel_app/providers/settings_provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SettingsProvider(), // Tạo instance của provider
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -16,16 +23,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Locale _locale = const Locale('en'); // Default locale
-
-  void _changeLocale(Locale locale) {
-    setState(() {
-      _locale = locale; // Update the locale
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    // Lắng nghe thay đổi locale từ provider
+    final settingsProvider = Provider.of<SettingsProvider>(context);
+
     return MaterialApp(
       title: 'Multilingual Travel Guide',
       localizationsDelegates: [
@@ -34,12 +36,12 @@ class _MyAppState extends State<MyApp> {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      locale: _locale,
+      locale: settingsProvider.appLocale,
       // localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: L10n.all,
       themeMode: ThemeMode.system,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: NavigationMenu(onLocaleChanged: _changeLocale),
+      home: NavigationMenu(),
       debugShowCheckedModeBanner: false,
     );
   }
