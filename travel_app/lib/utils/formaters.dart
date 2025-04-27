@@ -14,27 +14,45 @@ class Formatters {
     return formatter.format(date);
   }
 
+  static String formatCurrency(
+    double amount,
+    String currencyCode,
+    Locale locale,
+  ) {
+    // Tạo NumberFormat dựa trên locale VÀ currency code
+    // Ví dụ: locale 'vi_VN' và currency 'VND' -> 25.000.000 ₫
+    // Ví dụ: locale 'en_US' và currency 'USD' -> $1,000.00
+    // Ví dụ: locale 'ja_JP' và currency 'JPY' -> ￥150,000
+    // Currency code xác định ký hiệu tiền tệ.
+    final format = NumberFormat.currency(
+      locale: locale.toString(), // ví dụ: 'vi_VN', 'en_US', 'ja_JP'
+      symbol: _getCurrencySymbol(
+        currencyCode,
+      ), // Lấy ký hiệu chuẩn cho mã tiền tệ
+      decimalDigits: currencyCode == 'VND' ? 0 : 2, // Có thể tùy chỉnh số lẻ
+    );
+    return format.format(amount);
+  }
 
-  static String formatCurrency(double amount, Locale locale) {
+  static String _getCurrencySymbol(String currencyCode) {
+    switch (currencyCode) {
+      case 'USD':
+        return '\$';
+      case 'JPY':
+        return '¥';
+      default:
+        return '₫';
+    }
+  }
+
+  static double convertCurrency(double price, String targetCurrency) {
     double usdToVndRate = 0.00004; // Tỉ giá USD sang VNĐ
     double jpyToVndRate = 0.0055; // Tỉ giá Yên Nhật sang VNĐ
-    String currency;
-
-    // Xác định mệnh giá dựa trên locale
-    if (locale.languageCode == 'vi') {
-      currency = 'VNĐ';
-      amount = amount; // Giả sử giá là VNĐ
-    } else if (locale.languageCode == 'en') {
-      currency = 'USD';
-      amount *= usdToVndRate; // Chuyển đổi từ USD sang VNĐ
-    } else if (locale.languageCode == 'ja') {
-      currency = 'JPY';
-      amount *= jpyToVndRate; // Chuyển đổi từ Yên Nhật sang VNĐ
-    } else {
-      currency = 'VNĐ';
+    if (targetCurrency == 'USD') {
+      return price * usdToVndRate;
+    } else if (targetCurrency == 'JPY') {
+      return price * jpyToVndRate;
     }
-
-    final formatter = NumberFormat.simpleCurrency(locale: locale.toString(), name: currency);
-    return formatter.format(amount);
+    return price; // Mặc định là VND
   }
 }

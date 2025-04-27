@@ -155,9 +155,7 @@ class TutorialScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder:
-                                    (_) => NavigationMenu(
-                                      onLocaleChanged: (locale) {},
-                                    ),
+                                    (_) => NavigationMenu(),
                               ),
                               (route) => false,
                             );

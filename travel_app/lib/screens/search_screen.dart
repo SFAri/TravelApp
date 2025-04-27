@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/utils/destination_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -35,6 +37,9 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = context.watch<SettingsProvider>();
+    final selectedCurrency = settingsProvider.selectedCurrency;
+    final currentLocale = settingsProvider.appLocale;
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.searchAppbar),
@@ -88,7 +93,13 @@ class _SearchScreenState extends State<SearchScreen> {
                             leading: SizedBox(width: 80, child: Image.asset(destination['imageUrl'])),
                             title: Text(destination['name']),
                             subtitle: Text(destination['description']),
-                            trailing: Text(Formatters.formatCurrency(destination['price'].toDouble(), Localizations.localeOf(context))),
+                            trailing: Text(
+                              Formatters.formatCurrency(
+                                Formatters.convertCurrency(destination['price'].toDouble(), selectedCurrency),
+                                selectedCurrency,
+                                currentLocale,
+                              )
+                            ),
                             onTap: () {
                               // Navigate to detail screen
                               Navigator.push(

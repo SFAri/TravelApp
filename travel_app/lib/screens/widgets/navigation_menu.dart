@@ -4,9 +4,8 @@ import 'package:travel_app/screens/home_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NavigationMenu extends StatefulWidget {
-  final Function(Locale) onLocaleChanged; // Callback for changing locale
 
-  const NavigationMenu({super.key, required this.onLocaleChanged});
+  const NavigationMenu({super.key});
 
   @override
   State<NavigationMenu> createState() => _NavigationMenuState();
@@ -41,7 +40,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   Widget _getBody() {
     switch (selectedIndex) {
       case 0:
-        return HomeScreen(onLocaleChanged: widget.onLocaleChanged); // Màn hình chính
+        return HomeScreen(); // Màn hình chính
       case 1:
         return CategoryScreen(); // Màn hình danh mục
       default:
