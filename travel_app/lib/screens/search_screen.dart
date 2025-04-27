@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/utils/destination_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travel_app/utils/formaters.dart';
 
 class SearchScreen extends StatefulWidget {
   final String query;
@@ -35,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search destination'),
+        title: Text(AppLocalizations.of(context)!.searchAppbar),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10),
@@ -49,7 +51,7 @@ class _SearchScreenState extends State<SearchScreen> {
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: AppLocalizations.of(context)!.hintSearchbar,
                   label: Icon(Icons.search),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10)
@@ -63,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
             Row(
               spacing: 10,
               children: [
-                Text('Result', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),),
+                Text(AppLocalizations.of(context)!.resultSection, style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic),),
                 Expanded(child: Divider()),
               ],
             ),
@@ -73,7 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
               child: filteredDestinations.isEmpty
                   ? Center(
                       child: Text(
-                        'No matching destinations found.',
+                        AppLocalizations.of(context)!.noValue,
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
                     )
@@ -86,7 +88,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             leading: SizedBox(width: 80, child: Image.asset(destination['imageUrl'])),
                             title: Text(destination['name']),
                             subtitle: Text(destination['description']),
-                            trailing: Text('\$${destination['price']}'),
+                            trailing: Text(Formatters.formatCurrency(destination['price'].toDouble(), Localizations.localeOf(context))),
                             onTap: () {
                               // Navigate to detail screen
                               Navigator.push(

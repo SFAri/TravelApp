@@ -1,0 +1,162 @@
+{
+  "homeNavigation": "Home",
+  "@homeNavigation": {
+    "description": "label for homeNavigation"
+  },
+  "categoryNavigation": "Category",
+  "@categoryNavigation": {
+    "description": "label for categoryNavigation"
+  },
+  "homeAppbar": "Travel Guide",
+  "@homeAppbar": {
+    "description": "title of homepage Appbar"
+  },
+  "hintSearchbar": "Search destinations",
+  "@hintSearchbar": {
+    "description": "hint text of search bar"
+  },
+  "popularPlaces": "Popular places",
+  "@popularPlaces": {
+    "description": "section title of popular places"
+  },
+  "viewButton": "View more >>>",
+  "@viewButton": {
+    "description": "View more Button"
+  },
+  "categoryAppbar": "Category",
+  "@categoryAppbar": {
+    "description": "title of category Appbar"
+  },
+  "natureCategory": "Nature",
+  "@natureCategory": {
+    "description": "name of Nature Category"
+  },
+  "historicalCategory": "Historical Sites",
+  "@historicalCategory": {
+    "description": "name of Historical Category"
+  },
+  "culturalCategory": "Cultural",
+  "@culturalCategory": {
+    "description": "name of Cultural Category"
+  },
+  "entertainmentCategory": "Entertainment",
+  "@entertainmentCategory": {
+    "description": "name of Entertainment Category"
+  },
+  "descriptionSection": "Description",
+  "@descriptionSection": {
+    "description": "description label of destination"
+  },
+  "phoneLabel": "Phone contact",
+  "@priceValue": {
+    "description": "phone contact label of destination"
+  },
+  "priceValue": "{value}",
+  "@priceValue": {
+    "description": "price of destination",
+    "placeholders": {
+      "value": {
+        "type": "int",
+        "format" : "compactCurrency",
+        "optionalParameters" : {
+          "decimalDigits" : 2
+        }
+      }
+    }
+  },
+  "openTimeLabel": "Open time",
+  "@openTimeLabel": {
+    "description": "openTime label of destination"
+  },
+  "openTimeValue": "{date}",
+  "@openTimeValue": {
+    "description": "openTime of destination",
+    "placeholders": {
+      "date": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  },
+  "moreDetailLabel": "More detail",
+  "@moreDetailLabel": {
+    "description": "more detail label of destination"
+  },
+  "searchAppbar": "Search destination",
+  "@searchAppbar": {
+    "description": "Name of Search Appbar"
+  },
+  "resultSection": "Result",
+  "@resultSection": {
+    "description": "Label of the result in search screen"
+  },
+  "settingAppbar": "Setting",
+  "@settingAppbar": {
+    "description": "Name of Setting Appbar"
+  },
+  "generalInfomationSection": "General information",
+  "@generalInfomation": {
+    "description": "General information sector title"
+  },
+  "securitySection": "Security",
+  "@securitySection": {
+    "description": "Security sector title"
+  },
+  "otherSection": "Other",
+  "@otherSection": {
+    "description": "Other sector title"
+  },
+  "chooseLanguageButton": "Language",
+  "@chooseLanguageButton": {
+    "description": "Choose language text button"
+  },
+  "chooseCurrencyButton": "Currency",
+  "@chooseCurrencyButton": {
+    "description": "Choose Currency text button"
+  },
+  "chooseDateButton": "Format DateTime",
+  "@chooseDateButton": {
+    "description": "Choose DateTime text button"
+  },
+  "hintDateFormat": "dd/MM/yyyy",
+  "@hintDateFormat": {
+    "description": "hint Date format"
+  },
+  "chooseThemeButton": "Theme mode",
+  "@chooseThemeButton": {
+    "description": "Choose Theme mode text button"
+  },
+  "chooseNotificationButton": "Turn on/off notification",
+  "@chooseNotificationButton": {
+    "description": "Choose notification mode text button"
+  },
+  "chooseReportButton": "Leave report",
+  "@chooseReportButton": {
+    "description": "Choose report text button"
+  },
+  "chooseTutorialButton": "Tutorial Guide",
+  "@chooseTutorialButton": {
+    "description": "Choose Tutorial text button"
+  },
+  "chooseAboutButton": "About Travel Guide",
+  "@chooseAboutButton": {
+    "description": "Choose about text button"
+  },
+  "englishLanguage": "English",
+  "@englishLanguage": {
+    "description": "Title English language"
+  },
+  "vietnameseLanguage": "Vietnamese",
+  "@vietnameseLanguage": {
+    "description": "Title Vietnamese language"
+  },
+  "japaneseLanguage": "Japanese",
+  "@japaneseLanguage": {
+    "description": "Title Japanese language"
+  },
+
+  "noValue": "No matching destinations found",
+  "@noValue": {
+    "description": "Text display when no destinations matched"
+  }
+}

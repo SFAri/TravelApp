@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/destination_detail.dart';
+import 'package:travel_app/utils/formaters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DestinationListWidget extends StatefulWidget {
   final List<Map<String, dynamic>> destinations;
@@ -39,7 +41,7 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
           padding: const EdgeInsets.all(8.0),
           child: TextField(
             decoration: InputDecoration(
-              labelText: 'Search Destinations',
+              labelText: AppLocalizations.of(context)!.hintSearchbar,
               border: OutlineInputBorder(),
             ),
             onChanged: _filterDestinations,
@@ -49,7 +51,7 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
           child: filteredDestinations.isEmpty
           ? Center(
               child: Text(
-                'No matching destinations found.',
+                AppLocalizations.of(context)!.noValue,
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             )
@@ -65,7 +67,7 @@ class _DestinationListWidgetState extends State<DestinationListWidget> {
                     ),
                     title: Text(destination['name']),
                     subtitle: Text(destination['description']),
-                    trailing: Text('\$${destination['price']}'),
+                    trailing: Text(Formatters.formatCurrency(destination['price'].toDouble(), Localizations.localeOf(context))),
                     onTap: () {
                       // Navigate to detail screen
                       Navigator.push(

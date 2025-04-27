@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/utils/formaters.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DestinationDetailScreen extends StatefulWidget {
   final Map<String, dynamic> destination;
@@ -52,7 +53,7 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
               children: [
                 Icon(Icons.new_releases_rounded, color: Colors.amberAccent,),
                 Text(
-                  Formatters.formatPrice(widget.destination['price']),
+                  Formatters.formatCurrency(widget.destination['price'].toDouble(), Localizations.localeOf(context)),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
                 ),
               ],
@@ -62,25 +63,25 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                'Description', 
+                AppLocalizations.of(context)!.descriptionSection, 
                 style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic)
               )
             ),
             Row(
               spacing: 20,
               children: [
-                Text('- Open time: ', style: TextStyle(fontWeight: FontWeight.bold),),
+                Text('- ${AppLocalizations.of(context)!.openTimeLabel}: ', style: TextStyle(fontWeight: FontWeight.bold),),
                 Text(widget.destination['openTime'])
               ],
             ),
             Row(
               spacing: 20,
               children: [
-                Text('- Phone contact: ', style: TextStyle(fontWeight: FontWeight.bold),),
+                Text('- ${AppLocalizations.of(context)!.phoneLabel}: ', style: TextStyle(fontWeight: FontWeight.bold),),
                 Text(widget.destination['phone'])
               ],
             ),
-            Text('- More detail: ', style: TextStyle(fontWeight: FontWeight.bold),),
+            Text('- ${AppLocalizations.of(context)!.moreDetailLabel}: ', style: TextStyle(fontWeight: FontWeight.bold),),
             Text(
               widget.destination['description'],
               textAlign: TextAlign.left,

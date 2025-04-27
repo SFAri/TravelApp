@@ -5,10 +5,12 @@ import 'package:travel_app/screens/search_screen.dart';
 import 'package:travel_app/screens/settings_screen.dart';
 import 'package:travel_app/utils/constants/image_string.dart';
 import 'package:travel_app/utils/destination_data.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
+  final Function(Locale) onLocaleChanged; // Locale change callback
 
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, required this.onLocaleChanged});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late CarouselSliderController controller;
   late int selected;
   final TextEditingController _searchController = TextEditingController();
+  String? _selectedLanguage;
 
   @override
   void initState() {
@@ -28,21 +31,84 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    Locale currentLocale = Localizations.localeOf(context);
+    if (currentLocale.languageCode == 'en') {
+      _selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
+    } else if (currentLocale.languageCode == 'vi') {
+      _selectedLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
+    } else if (currentLocale.languageCode == 'ja') {
+      _selectedLanguage = AppLocalizations.of(context)!.japaneseLanguage;
+    }
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _searchController.dispose();
+  }
+
+  void _showLanguageSelectionDialog() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
+      builder: (context) {
+
+        return Container(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 10),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.englishLanguage),
+                trailing: _selectedLanguage == AppLocalizations.of(context)!.englishLanguage
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+                onTap: () {
+                  widget.onLocaleChanged(const Locale('en')); // Change locale to English
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.vietnameseLanguage),
+                trailing: _selectedLanguage == AppLocalizations.of(context)!.vietnameseLanguage
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+                onTap: () {
+                  widget.onLocaleChanged(const Locale('vi')); // Change locale to Vietnamese
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.japaneseLanguage),
+                trailing: _selectedLanguage == AppLocalizations.of(context)!.japaneseLanguage
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+                onTap: () {
+                  widget.onLocaleChanged(const Locale('ja')); // Change locale to Japanese
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Travel Guide'),
+        // title: Text('Travel Guide'),
+        title: Text(AppLocalizations.of(context)!.homeAppbar),
         actions: [
           IconButton(
             icon: Icon(Icons.language),
             onPressed: () {
-              
+              _showLanguageSelectionDialog();
             },
           ),
           IconButton(
@@ -52,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => const SettingsScreen(),
+                  builder: (_) => SettingsScreen(onLocaleChanged: widget.onLocaleChanged),
                 ),
               );
             },
@@ -77,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: TextFormField(
                     controller: _searchController,
                     decoration: InputDecoration(
-                      hintText: 'Search',
+                      hintText: AppLocalizations.of(context)!.hintSearchbar,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)
                       )
@@ -172,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               spacing: 10,
               children: [
-                Text('Popular places', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                Text(AppLocalizations.of(context)!.popularPlaces, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                 Divider(thickness: 2, height: 2, color: Colors.grey,)
               ],
             ),
@@ -211,7 +277,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.centerRight,
               child: TextButton(
                 onPressed: (){},
-                child: Text('view more >>>', style: TextStyle(color: Colors.blue),),
+                child: Text(AppLocalizations.of(context)!.viewButton, style: TextStyle(color: Colors.blue),),
               ),
             )
           ],

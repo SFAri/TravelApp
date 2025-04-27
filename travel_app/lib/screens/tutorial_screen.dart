@@ -157,7 +157,7 @@ class TutorialScreen extends StatelessWidget {
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => const NavigationMenu(),
+                                builder: (_) => NavigationMenu(onLocaleChanged: (locale) {}),
                               ),
                               (route) => false,
                             );
