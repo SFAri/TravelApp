@@ -94,8 +94,8 @@
   "@settingAppbar": {
     "description": "Name of Setting Appbar"
   },
-  "generalInfomationSection": "General information",
-  "@generalInfomation": {
+  "generalInformationSection": "General information",
+  "@generalInformationSection": {
     "description": "General information sector title"
   },
   "securitySection": "Security",
@@ -154,9 +154,38 @@
   "@japaneseLanguage": {
     "description": "Title Japanese language"
   },
-
   "noValue": "No matching destinations found",
   "@noValue": {
     "description": "Text display when no destinations matched"
-  }
+  },
+  "appTitle": "Multilingual Travel Guide App",
+  "aboutAppBar": "Introduce",
+  "version": "Version:",
+  "aboutSection": "Application",
+  "featureSection": "Main features",
+  "developerSection": "About the development group",
+  "aboutDescription": "The multi-language travel guide application is designed to provide users with detailed information about famous tourist destinations.Users can explore locations with descriptions, fare, opening hours and contact information.The application supports many languages, including Vietnamese, English and Japanese, allowing users to view content in their favorite languages.",
+  "featureDescription1": "See a list of tourist destinations with brief description.",
+  "featureDescription2": "Detailed information about location, including fares, opening hours and contact information.",
+  "featureDescription3": "Conversion between languages (Vietnamese, English, Japanese) through the installation menu.",
+  "featureDescription4": "Display information formatted in the selected language/area (for example: currency, date/hour, phone number).",
+  "featureDescription5": "Beautiful interface with illustrations.",
+  "developerDescription": "Our group is passionate about creating user friendly and creative applications to enhance your travel experience.We hope this application will help you explore the world easily and conveniently.",
+  "thankYou": "Thank you for using our application!",
+  "tutorialAppBar": "Instructions for use",
+  "tutorialTitle": "Application user manual",
+  "tutorialSection": "How to use the application",
+  "hintSearchText": "Find questions",
+  "faqSection": "See common questions",
+  "findByCatogarySection": "Search by section",
+  "faqQuestion1": "What information does the application provide?",
+  "faqAnswer1": "The application provides information about tourist destinations, including descriptions, fare, opening hours and contact information.",
+  "faqQuestion2": "How to convert language?",
+  "faqAnswer2": "You can convert language via the installation menu or button on the interface.",
+  "faqQuestion3": "Is the display information format in language?",
+  "faqAnswer3": "Yes, formats such as fares, date and time and phone numbers will be adjusted in the language/area you choose.",
+  "faqQuestion4": "What languages ​​are the application support?",
+  "faqAnswer4": "The application is supporting Vietnamese, English and Japanese.",
+  "faqQuestion5": "How can I see the details of the location?",
+  "faqAnswer5": "You can click on a location on the list to see details, including description, ticket price and opening hours."
 }

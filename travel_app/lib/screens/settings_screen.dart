@@ -29,7 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.didChangeDependencies();
     // Khởi tạo ngôn ngữ mặc định từ AppLocalization
     Locale currentLocale = Localizations.localeOf(context);
-    String languageCode = currentLocale.languageCode; 
+    String languageCode = currentLocale.languageCode;
     switch (languageCode) {
       case 'en':
         _selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
@@ -68,8 +68,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ListTile(
                   title: Text(options[index]),
                   trailing: _selectedLanguage == options[index]
-                      ? const Icon(Icons.check, color: Colors.blue)
-                      : null,
+                          ? const Icon(Icons.check, color: Colors.blue)
+                          : null,
                   onTap: () {
                     setState(() {
                       _selectedLanguage = options[index]; // Cập nhật biến thành viên
@@ -99,7 +99,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           controller: ScrollController(
             initialScrollOffset: _selectedLanguage != null
                 ? options.indexOf(_selectedLanguage!) * 32.0 // Chiều cao ước tính của ListTile
-                : 0.0,
+                    : 0.0,
           ),
         );
       },
@@ -108,8 +108,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // You can replace these with your real logic or use Provider/Bloc
-    bool enableCustomTheme = false;
     bool enableNotifications = true;
 
     return Container(
@@ -131,14 +129,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Common Section
-                    MenuSettingSection(title: AppLocalizations.of(context)!.generalInfomationSection),
+                    MenuSettingSection(
+                      title:
+                          AppLocalizations.of(
+                            context,
+                          )!.generalInformationSection,
+                    ),
                     Container(
                       color: Colors.white,
                       child: Column(
                         children: [
                           MenuSettingTitle(
                             icon: Icons.language,
-                            title: AppLocalizations.of(context)!.chooseLanguageButton,
+                            title:
+                                AppLocalizations.of(
+                                  context,
+                                )!.chooseLanguageButton,
                             subtitle: _langController.text,
                             onTap:
                                 () => _showSelectionDialog(
@@ -160,13 +166,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           // ),
                           MenuSettingTitle(
                             icon: Icons.date_range,
-                            title: AppLocalizations.of(context)!.chooseDateButton,
+                            title:
+                                AppLocalizations.of(context)!.chooseDateButton,
                             subtitle: 'dd/MM/yyyy',
                             onTap: () {},
                           ),
                           MenuSettingTitle(
                             icon: Icons.format_paint,
-                            title: AppLocalizations.of(context)!.chooseThemeButton,
+                            title:
+                                AppLocalizations.of(context)!.chooseThemeButton,
                             subtitle: 'Dark Mode',
                             onTap: () {},
                           ),
@@ -175,14 +183,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
 
                     // Security Section
-                    MenuSettingSection(title: AppLocalizations.of(context)!.securitySection),
+                    MenuSettingSection(
+                      title: AppLocalizations.of(context)!.securitySection,
+                    ),
                     Container(
                       color: Colors.white,
                       child: Column(
                         children: [
                           MenuSettingTitle(
                             icon: Icons.notifications,
-                            title: AppLocalizations.of(context)!.chooseNotificationButton,
+                            title:
+                                AppLocalizations.of(
+                                  context,
+                                )!.chooseNotificationButton,
                             hasSwitch: true,
                             switchValue: enableNotifications,
                             onSwitchChanged: (value) {},
@@ -192,19 +205,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
 
                     // Other Section (Based on second screen)
-                    MenuSettingSection(title: AppLocalizations.of(context)!.otherSection),
+                    MenuSettingSection(
+                      title: AppLocalizations.of(context)!.otherSection,
+                    ),
                     Container(
                       color: Colors.white,
                       child: Column(
                         children: [
                           MenuSettingTitle(
                             icon: Icons.feedback_outlined,
-                            title: AppLocalizations.of(context)!.chooseReportButton,
+                            title:
+                                AppLocalizations.of(
+                                  context,
+                                )!.chooseReportButton,
                             onTap: () {},
                           ),
                           MenuSettingTitle(
                             icon: Icons.help_outline,
-                            title: AppLocalizations.of(context)!.chooseTutorialButton,
+                            title:
+                                AppLocalizations.of(
+                                  context,
+                                )!.chooseTutorialButton,
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -216,7 +237,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           ),
                           MenuSettingTitle(
                             icon: Icons.info_outline,
-                            title: AppLocalizations.of(context)!.chooseAboutButton,
+                            title:
+                                AppLocalizations.of(context)!.chooseAboutButton,
                             onTap: () {
                               Navigator.push(
                                 context,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/widgets/navigation_menu.dart';
 import 'package:travel_app/screens/widgets/settings/menu_setting_title.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TutorialScreen extends StatelessWidget {
   const TutorialScreen({super.key});
@@ -9,34 +10,30 @@ class TutorialScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Map<String, String>> faqItems = [
       {
-        'question': 'Ứng dụng cung cấp thông tin gì?',
-        'answer':
-            'Ứng dụng cung cấp thông tin về các địa điểm du lịch, bao gồm mô tả, giá vé, giờ mở cửa và thông tin liên hệ.',
+        'question': AppLocalizations.of(context)!.faqQuestion1,
+        'answer': AppLocalizations.of(context)!.faqAnswer1,
       },
       {
-        'question': 'Làm sao để chuyển đổi ngôn ngữ?',
-        'answer':
-            'Bạn có thể chuyển đổi ngôn ngữ qua menu cài đặt hoặc nút trên giao diện.',
+        'question': AppLocalizations.of(context)!.faqQuestion2,
+        'answer': AppLocalizations.of(context)!.faqAnswer2,
       },
       {
-        'question': 'Thông tin hiển thị có được định dạng theo ngôn ngữ không?',
-        'answer':
-            'Có, các định dạng như giá vé, ngày giờ và số điện thoại sẽ được điều chỉnh theo ngôn ngữ/khu vực bạn chọn.',
+        'question': AppLocalizations.of(context)!.faqQuestion3,
+        'answer': AppLocalizations.of(context)!.faqAnswer3,
       },
       {
-        'question': 'Ứng dụng hỗ trợ những ngôn ngữ nào?',
-        'answer': 'Ứng dụng hỗ trợ Tiếng Việt, Tiếng Anh và Tiếng Nhật.',
+        'question': AppLocalizations.of(context)!.faqQuestion4,
+        'answer': AppLocalizations.of(context)!.faqAnswer4,
       },
       {
-        'question': 'Tôi có thể xem chi tiết địa điểm như thế nào?',
-        'answer':
-            'Bạn có thể nhấn vào một địa điểm trong danh sách để xem chi tiết, bao gồm mô tả, giá vé và giờ mở cửa.',
+        'question': AppLocalizations.of(context)!.faqQuestion5,
+        'answer': AppLocalizations.of(context)!.faqAnswer5,
       },
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Hướng dẫn sử dụng'),
+        title: Text(AppLocalizations.of(context)!.tutorialAppBar),
         backgroundColor: Colors.white,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -59,7 +56,7 @@ class TutorialScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          'Hướng dẫn sử dụng ứng dụng Travel Guide Vietnam',
+                          AppLocalizations.of(context)!.tutorialTitle,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -78,7 +75,7 @@ class TutorialScreen extends StatelessWidget {
                   const SizedBox(height: 16),
                   TextField(
                     decoration: InputDecoration(
-                      hintText: 'Tìm câu hỏi',
+                      hintText: AppLocalizations.of(context)!.hintSearchText,
                       filled: true,
                       fillColor: Colors.white,
                       prefixIcon: const Icon(Icons.search),
@@ -97,7 +94,7 @@ class TutorialScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Xem câu hỏi phổ biến',
+                    AppLocalizations.of(context)!.faqSection,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -136,7 +133,7 @@ class TutorialScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Tìm theo mục',
+                    AppLocalizations.of(context)!.findByCatogarySection,
                     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -151,13 +148,16 @@ class TutorialScreen extends StatelessWidget {
                       children: [
                         MenuSettingTitle(
                           icon: Icons.home,
-                          title: 'Trang chủ',
+                          title: AppLocalizations.of(context)!.homeAppbar,
                           onTap: () {
                             // Navigate to home screen
                             Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => NavigationMenu(onLocaleChanged: (locale) {}),
+                                builder:
+                                    (_) => NavigationMenu(
+                                      onLocaleChanged: (locale) {},
+                                    ),
                               ),
                               (route) => false,
                             );
@@ -165,7 +165,7 @@ class TutorialScreen extends StatelessWidget {
                         ),
                         MenuSettingTitle(
                           icon: Icons.help_rounded,
-                          title: 'Cách sử dụng Ứng dụng',
+                          title: AppLocalizations.of(context)!.tutorialSection,
                           onTap: () {},
                         ),
                       ],

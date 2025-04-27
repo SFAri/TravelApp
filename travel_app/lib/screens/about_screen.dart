@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
@@ -7,7 +8,7 @@ class AboutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giới thiệu'),
+        title: Text(AppLocalizations.of(context)!.aboutAppBar),
         backgroundColor: Colors.white,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.black),
@@ -31,7 +32,7 @@ class AboutScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              'Ứng dụng Hướng dẫn Du lịch Đa ngôn ngữ',
+              AppLocalizations.of(context)!.appTitle,
               style: Theme.of(
                 context,
               ).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.bold),
@@ -41,7 +42,7 @@ class AboutScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  'Phiên bản: ',
+                  AppLocalizations.of(context)!.version,
                   style: Theme.of(
                     context,
                   ).textTheme.titleSmall!.copyWith(color: Colors.grey),
@@ -58,51 +59,48 @@ class AboutScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
             Text(
-              'Về ứng dụng',
+              AppLocalizations.of(context)!.aboutSection,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              'Ứng dụng Hướng dẫn Du lịch Đa ngôn ngữ được thiết kế để cung cấp cho người dùng thông tin chi tiết về các địa điểm du lịch nổi tiếng. '
-              'Người dùng có thể khám phá các địa điểm với mô tả, giá vé, giờ mở cửa và thông tin liên hệ. '
-              'Ứng dụng hỗ trợ nhiều ngôn ngữ, bao gồm Tiếng Việt, Tiếng Anh và Tiếng Nhật, cho phép người dùng xem nội dung bằng ngôn ngữ ưa thích của mình.',
+              AppLocalizations.of(context)!.aboutDescription,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 20),
             Text(
-              'Tính năng chính',
+              AppLocalizations.of(context)!.featureSection,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              '- Xem danh sách các địa điểm du lịch với mô tả ngắn gọn.\n'
-              '- Thông tin chi tiết về địa điểm, bao gồm giá vé, giờ mở cửa và thông tin liên hệ.\n'
-              '- Chuyển đổi giữa các ngôn ngữ (Tiếng Việt, Tiếng Anh, Tiếng Nhật) qua menu cài đặt.\n'
-              '- Hiển thị thông tin được định dạng theo ngôn ngữ/khu vực đã chọn (ví dụ: tiền tệ, ngày/giờ, số điện thoại).\n'
-              '- Giao diện đẹp với hình ảnh minh họa.',
+              '- ${AppLocalizations.of(context)!.featureDescription1}\n'
+              '- ${AppLocalizations.of(context)!.featureDescription2}\n'
+              '- ${AppLocalizations.of(context)!.featureDescription3}\n'
+              '- ${AppLocalizations.of(context)!.featureDescription4}\n'
+              '- ${AppLocalizations.of(context)!.featureDescription5}',
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 20),
             Text(
-              'Về nhóm phát triển',
+              AppLocalizations.of(context)!.developerSection,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             Text(
-              'Nhóm của chúng tôi đam mê tạo ra các ứng dụng thân thiện với người dùng và sáng tạo để nâng cao trải nghiệm du lịch của bạn. '
-              'Chúng tôi hy vọng ứng dụng này sẽ giúp bạn khám phá thế giới một cách dễ dàng và tiện lợi.',
+              AppLocalizations.of(context)!.developerDescription,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 20),
             Center(
               child: Text(
-                'Cảm ơn bạn đã sử dụng ứng dụng của chúng tôi!',
+                AppLocalizations.of(context)!.thankYou,
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.bold,
                   color: Colors.blue,
