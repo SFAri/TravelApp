@@ -154,6 +154,10 @@
   "@japaneseLanguage": {
     "description": "Title Japanese language"
   },
+  "koreanLanguage": "Korean",
+  "@englishLanguage": {
+    "description": "Title Korean language"
+  },
   "noValue": "No matching destinations found",
   "@noValue": {
     "description": "Text display when no destinations matched"

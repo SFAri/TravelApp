@@ -67,6 +67,8 @@ class Formatters {
         return '₫';
       case 'JPY':
         return '¥';
+      case 'KRW':
+        return '₩';
       default:
         return '\$'; // Mặc định là USD
     }
@@ -75,8 +77,10 @@ class Formatters {
   static double convertCurrency(double priceInUsd, String targetCurrency) {
     const double vndToUsdRate = 0.000038; // Tỉ giá USD sang USD
     const double jpyToUsdRate = 0.007; // Tỉ giá Yên Nhật sang USD
+    const double krwToUsdRate = 0.00070;
     const double usdToVndRate = 1 / vndToUsdRate;
     const double usdToJpyRate = 1 / jpyToUsdRate;
+    const double usdToKrwRate = 1/krwToUsdRate;
 
     double convertedAmount;
     // Thực hiện chuyển đổi
@@ -84,6 +88,8 @@ class Formatters {
       convertedAmount = priceInUsd * usdToVndRate;
     } else if (targetCurrency == 'JPY') {
       convertedAmount = priceInUsd * usdToJpyRate;
+    } else if (targetCurrency == 'KRW') {
+      convertedAmount = priceInUsd * usdToKrwRate;
     } else if (targetCurrency == 'USD') {
       convertedAmount = priceInUsd;
     } else {

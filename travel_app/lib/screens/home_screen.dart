@@ -41,7 +41,10 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
     } else if (currentLocale.languageCode == 'ja') {
       _selectedLanguage = AppLocalizations.of(context)!.japaneseLanguage;
+    } else if (currentLocale.languageCode == 'ko') {
+      _selectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
     }
+    
   }
 
   @override
@@ -89,6 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   : null,
                 onTap: () {
                   settingsProvider.changeLocale(const Locale('ja')); // Change locale to Japanese
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text(AppLocalizations.of(context)!.koreanLanguage),
+                trailing: _selectedLanguage == AppLocalizations.of(context)!.koreanLanguage
+                  ? const Icon(Icons.check, color: Colors.blue)
+                  : null,
+                onTap: () {
+                  settingsProvider.changeLocale(const Locale('ko')); // Change locale to Japanese
                   Navigator.pop(context);
                 },
               ),

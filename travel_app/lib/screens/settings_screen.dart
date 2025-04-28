@@ -34,7 +34,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       AppLocalizations.of(context)!.japaneseLanguage,
     ];
 
-    currencies = ["VND", "USD", "JPY"];
+    currencies = ["VND", "USD", "JPY", "KRW"];
 
     final localeString = Localizations.localeOf(context).toString();
 
@@ -97,10 +97,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             AppLocalizations.of(context)!.vietnameseLanguage;
         break;
       case 'ja':
-        
         currentSelectedLanguage =
             AppLocalizations.of(context)!.japaneseLanguage;
-        print('ENTER JA ---- $currentSelectedLanguage');
+      case 'ko':
+        currentSelectedLanguage =
+            AppLocalizations.of(context)!.koreanLanguage;
         break;
       default:
         currentSelectedLanguage = AppLocalizations.of(context)!.englishLanguage;
@@ -168,6 +169,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         break;
       case 'ja':
         displayLanguage = AppLocalizations.of(context)!.japaneseLanguage;
+        break;
+      case 'ko':
+        displayLanguage = AppLocalizations.of(context)!.koreanLanguage;
         break;
       default:
         displayLanguage = AppLocalizations.of(context)!.englishLanguage;

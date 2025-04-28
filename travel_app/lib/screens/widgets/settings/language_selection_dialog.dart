@@ -40,6 +40,8 @@ class LanguageSelectionDialog extends StatelessWidget {
                   newLocale = const Locale('vi');
                 } else if (languageName==AppLocalizations.of(context)!.japaneseLanguage) {
                   newLocale = const Locale('ja');
+                } else if (languageName==AppLocalizations.of(context)!.koreanLanguage) {
+                  newLocale = const Locale('ko');
                 } else {
                   newLocale = const Locale('en');
                 }
