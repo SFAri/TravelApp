@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/screens/about_screen.dart';
 import 'package:travel_app/screens/tutorial_screen.dart';
+import 'package:travel_app/screens/widgets/settings/currency_selection_dialog.dart';
+import 'package:travel_app/screens/widgets/settings/date_format_selection_dialog.dart';
+import 'package:travel_app/screens/widgets/settings/language_selection_dialog.dart';
 import 'package:travel_app/screens/widgets/settings/menu_setting_section.dart';
 import 'package:travel_app/screens/widgets/settings/menu_setting_title.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travel_app/utils/formaters.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -17,6 +22,8 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   late List<String> languages;
   late List<String> currencies;
+  late Map<String, String> availableDateFormats;
+  final DateTime sampleDate = DateTime.parse("2025-12-31 00:00:00");
 
   @override
   void didChangeDependencies() {
@@ -28,8 +35,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ];
 
     currencies = ["VND", "USD", "JPY"];
+
+    final localeString = Localizations.localeOf(context).toString();
+
+    availableDateFormats = {
+      'MM/dd/yyyy HH:mm': DateFormat(
+        'MM/dd/yyyy',
+        localeString,
+      ).add_Hm().format(sampleDate), // Ví dụ: 12/31/2025 12:00
+      'yyyy/MM/dd HH:mm': DateFormat(
+        'yyyy/MM/dd',
+        localeString,
+      ).add_Hm().format(sampleDate), // Ví dụ: 2025/12/31 12:00
+      'd MMM yyyy HH:mm': DateFormat(
+        'd MMM yyyy',
+        localeString,
+      ).add_Hm().format(
+        sampleDate,
+      ), // Ví dụ: 31 Thg 12 2025 12:00 (vi) hoặc 31 Dec 2025 12:00 (en)
+      'd MMMM yyyy HH:mm': DateFormat(
+        'd MMMM yyyy',
+        localeString,
+      ).add_Hm().format(
+        sampleDate,
+      ), // Ví dụ: 31 Tháng 12 2025 12:00 (vi) hoặc 31 December 2025 12:00 (en)
+      'MM/dd/yyyy hh:mm a': DateFormat(
+        'MM/dd/yyyy',
+        localeString,
+      ).add_jm().format(sampleDate), // Ví dụ: 12/31/2025 12:00 AM
+      'yyyy/MM/dd hh:mm a': DateFormat(
+        'yyyy/MM/dd',
+        localeString,
+      ).add_jm().format(sampleDate), // Ví dụ: 2025/12/31 12:00 AM
+      'd MMM yyyy hh:mm a': DateFormat(
+        'd MMM yyyy',
+        localeString,
+      ).add_jm().format(
+        sampleDate,
+      ), // Ví dụ: 31 Thg 12 2025 12:00 AM (vi) hoặc 31 Dec 2025 12:00 AM (en)
+      'd MMMM yyyy hh:mm a': DateFormat(
+        'd MMMM yyyy',
+        localeString,
+      ).add_jm().format(
+        sampleDate,
+      ), // Ví dụ: 31 Tháng 12 2025 (vi) hoặc 31 December 2025 (en)
+    };
   }
 
+  // Dialog chọn ngôn ngữ
   void _showLanguageSelectionDialog(SettingsProvider settingsProvider) {
     // Lấy locale hiện tại từ Provider để biết ngôn ngữ nào đang được chọn
     Locale currentLocale = settingsProvider.appLocale;
@@ -53,97 +106,44 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      builder: (context) {
-        return ListView.builder(
-          itemCount: languages.length,
-          itemBuilder: (context, index) {
-            final languageName = languages[index];
-            return Column(
-              children: [
-                ListTile(
-                  title: Text(languageName),
-                  trailing:
-                      currentSelectedLanguage == languageName
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : null,
-                  onTap: () {
-                    // Xác định locale mới dựa trên tên ngôn ngữ được chọn
-                    Locale newLocale;
-                    if (languageName ==
-                        AppLocalizations.of(context)!.englishLanguage) {
-                      newLocale = const Locale('en');
-                    } else if (languageName ==
-                        AppLocalizations.of(context)!.vietnameseLanguage) {
-                      newLocale = const Locale('vi');
-                    } else if (languageName ==
-                        AppLocalizations.of(context)!.japaneseLanguage) {
-                      newLocale = const Locale('ja');
-                    } else {
-                      newLocale = const Locale('en'); // Default language
-                    }
-
-                    // Gọi phương thức thay đổi trong Provider
-                    settingsProvider.changeLocale(newLocale);
-                    print('NEW LOCALE ---------$newLocale');
-                    Navigator.pop(context);
-                  },
-                ),
-                Divider(color: Colors.grey[300]),
-              ],
-            );
-          },
-          // Tính toán scroll offset dựa trên ngôn ngữ hiện tại từ Provider
-          controller: ScrollController(
-            initialScrollOffset:
-                languages.contains(currentSelectedLanguage)
-                    ? languages.indexOf(currentSelectedLanguage) *
-                        50.0 // Ước tính chiều cao ListTile + Divider
-                    : 0.0,
+      builder:
+          (context) => LanguageSelectionDialog(
+            languages: languages,
+            currentLanguage: currentSelectedLanguage,
+            onLanguageSelected: (locale) {
+              settingsProvider.changeLocale(locale);
+            },
           ),
-        );
-      },
     );
   }
 
-  // Hàm chọn tiền tệ - sửa đổi để dùng Provider
+  // Dialog chọn tiền tệ
   void _showCurrencySelectionDialog(SettingsProvider settingsProvider) {
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-      builder: (context) {
-        return ListView.builder(
-          itemCount: currencies.length, // Sử dụng danh sách mã tiền tệ
-          itemBuilder: (context, index) {
-            final currencyCode = currencies[index];
-            return Column(
-              children: [
-                ListTile(
-                  title: Text(currencyCode), // Hiển thị mã tiền tệ
-                  trailing:
-                      settingsProvider.selectedCurrency == currencyCode
-                          ? const Icon(Icons.check, color: Colors.blue)
-                          : null,
-                  onTap: () {
-                    settingsProvider.changeCurrency(currencyCode);
-                    print('NEW CURRENCY---------$currencyCode');
-                    Navigator.pop(context);
-                  },
-                ),
-                Divider(color: Colors.grey[300]),
-              ],
-            );
-          },
-          // Tính toán scroll offset dựa trên tiền tệ hiện tại từ Provider
-          controller: ScrollController(
-            initialScrollOffset:
-                settingsProvider.selectedCurrency != null
-                    ? currencies.indexOf(settingsProvider.selectedCurrency) *
-                        50.0 // Ước tính chiều cao ListTile + Divider
-                    : 0.0,
+      builder:
+          (context) => CurrencySelectionDialog(
+            currencies: currencies,
+            selectedCurrency: settingsProvider.selectedCurrency,
+            onCurrencySelected: (currency) {
+              settingsProvider.changeCurrency(currency);
+            },
           ),
-        );
-      },
+    );
+  }
+
+  // Dialog chọn định dạng ngày giờ
+  void _showDateFormatSelectionDialog(SettingsProvider settingsProvider) {
+    showModalBottomSheet(
+      context: context,
+      builder:
+          (context) => DateFormatSelectionDialog(
+            availableDateFormats: availableDateFormats,
+            selectedPattern: settingsProvider.selectedDateFormatPattern,
+            onPatternSelected: (pattern) {
+              settingsProvider.changeDateFormat(pattern);
+            },
+          ),
     );
   }
 
@@ -152,6 +152,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Lắng nghe thay đổi từ SettingsProvider
     // Dùng context.watch để widget này tự động build lại khi state thay đổi
     final settingsProvider = context.watch<SettingsProvider>();
+    final selectedPattern = settingsProvider.selectedDateFormatPattern;
 
     // Xác định tên ngôn ngữ hiển thị dựa trên locale từ Provider
     String displayLanguage;
@@ -232,8 +233,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             icon: Icons.date_range,
                             title:
                                 AppLocalizations.of(context)!.chooseDateButton,
-                            subtitle: 'dd/MM/yyyy',
-                            onTap: () {},
+                            subtitle: Formatters.getDisplayPatternString(
+                              selectedPattern,
+                            ),
+                            onTap:
+                                () => _showDateFormatSelectionDialog(
+                                  context.read<SettingsProvider>(),
+                                ),
                           ),
                           MenuSettingTitle(
                             icon: Icons.format_paint,

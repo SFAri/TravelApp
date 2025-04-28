@@ -19,6 +19,17 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
     final settingsProvider = context.watch<SettingsProvider>();
     final selectedCurrency = settingsProvider.selectedCurrency;
     final currentLocale = settingsProvider.appLocale;
+    final selectedPattern = settingsProvider.selectedDateFormatPattern;
+
+    // --- Định dạng lại openTime theo pattern đã chọn ---
+    final String? openTimeString = widget.destination['openTime'];
+
+    final String formattedOpenTime = Formatters.formatDateTimeString(
+      openTimeString,
+      selectedPattern, // Truyền pattern đã chọn
+      currentLocale, // Truyền locale hiện tại
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.destination['name']!),
@@ -62,7 +73,7 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
                     Formatters.convertCurrency(widget.destination['price'].toDouble(), selectedCurrency),
                     selectedCurrency,
                     currentLocale,
-                    ),
+                  ),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
                 ),
               ],
@@ -72,7 +83,7 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                AppLocalizations.of(context)!.descriptionSection, 
+                AppLocalizations.of(context)!.descriptionSection,
                 style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic)
               )
             ),
@@ -80,7 +91,7 @@ class _DestinationDetailScreenState extends State<DestinationDetailScreen> {
               spacing: 20,
               children: [
                 Text('- ${AppLocalizations.of(context)!.openTimeLabel}: ', style: TextStyle(fontWeight: FontWeight.bold),),
-                Text(widget.destination['openTime'])
+                Text(formattedOpenTime)
               ],
             ),
             Row(

@@ -2,29 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
-  Locale _appLocale = const Locale('vi'); // Ngôn ngữ mặc định
-  String _selectedCurrency = 'VND'; // Tiền tệ mặc định
-  static const String _currencyKey =
-      'selected_currency'; // Key để lưu SharedPreferences
-  static const String _localeKey =
-      'selected_locale'; // Key để lưu SharedPreferences
+  Locale _appLocale = const Locale('en'); // Ngôn ngữ mặc định
+  String _selectedCurrency = 'USD'; // Tiền tệ mặc định
+  // Định dạng ngày giờ mặc định
+  String _selectedDateFormatPattern = 'MM/dd/yyyy HH:mm';
+
+  // Tạo các key để lưu SharedPreferences
+  static const String _currencyKey = 'selected_currency';
+  static const String _localeKey = 'selected_locale';
+  static const String _dateFormatKey = 'dateFormatPattern';
 
   Locale get appLocale => _appLocale;
   String get selectedCurrency => _selectedCurrency;
+  String get selectedDateFormatPattern => _selectedDateFormatPattern;
 
   SettingsProvider() {
-    _loadSettings(); // Tải cài đặt khi khởi tạo
+    _loadSettings(); // Tải các setting khi khởi tạo
   }
 
-  // Tải cài đặt từ SharedPreferences
+  // Tải các setting từ SharedPreferences
   Future<void> _loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
     // Tải tiền tệ
     _selectedCurrency =
-        prefs.getString(_currencyKey) ?? 'VND'; // Mặc định là USD nếu chưa có
+        prefs.getString(_currencyKey) ?? 'USD'; // Mặc định là USD
     // Tải ngôn ngữ
-    String langCode = prefs.getString(_localeKey) ?? 'vi'; // Mặc định là 'vi'
+    String langCode = prefs.getString(_localeKey) ?? 'en'; // Mặc định là 'vi'
     _appLocale = Locale(langCode);
+
+    _selectedDateFormatPattern =
+        prefs.getString(_dateFormatKey) ?? 'MM/dd/yyyy HH:mm';
 
     notifyListeners();
   }
@@ -34,19 +41,27 @@ class SettingsProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_currencyKey, _selectedCurrency);
     await prefs.setString(_localeKey, _appLocale.languageCode);
+    await prefs.setString(_dateFormatKey, _selectedDateFormatPattern);
   }
 
   void changeLocale(Locale newLocale) {
     if (_appLocale == newLocale) return;
     _appLocale = newLocale;
-    _saveSettings(); // Lưu lại khi thay đổi
-    notifyListeners(); // Thông báo thay đổi
+    _saveSettings();
+    notifyListeners();
   }
 
   void changeCurrency(String newCurrency) {
     if (_selectedCurrency == newCurrency) return;
     _selectedCurrency = newCurrency;
-    _saveSettings(); // Lưu lại khi thay đổi
-    notifyListeners(); // Thông báo thay đổi
+    _saveSettings();
+    notifyListeners();
+  }
+
+  void changeDateFormat(String newDateFormat) {
+    if (_selectedDateFormatPattern == newDateFormat) return;
+    _selectedDateFormatPattern = newDateFormat;
+    _saveSettings();
+    notifyListeners();
   }
 }

@@ -159,33 +159,127 @@
     "description": "Text display when no destinations matched"
   },
   "appTitle": "Multilingual Travel Guide App",
+  "@appTitle": {
+    "description": "Title of the application"
+  },
   "aboutAppBar": "Introduce",
+  "@aboutAppBar": {
+    "description": "title of about Appbar"
+  },
   "version": "Version:",
+  "@version": {
+    "description": "Version label"
+  },
+  "versionSection": "Version: ",
+  "@versionSection": {
+    "description": "Version label"
+  },
   "aboutSection": "Application",
+  "@aboutSection": {
+    "description": "About label"
+  },
   "featureSection": "Main features",
+  "@featureSection": {
+    "description": "Features label"
+  },
   "developerSection": "About the development group",
+  "@developerSection": {
+    "description": "Developer label"
+  },
   "aboutDescription": "The multi-language travel guide application is designed to provide users with detailed information about famous tourist destinations.Users can explore locations with descriptions, fare, opening hours and contact information.The application supports many languages, including Vietnamese, English and Japanese, allowing users to view content in their favorite languages.",
+  "@aboutDescription": {
+    "description": "About description"
+  },
   "featureDescription1": "See a list of tourist destinations with brief description.",
+  "@featureDescription1": {
+    "description": "Feature description 1"
+  },
   "featureDescription2": "Detailed information about location, including fares, opening hours and contact information.",
+  "@featureDescription2": {
+    "description": "Feature description 2"
+  },
   "featureDescription3": "Conversion between languages (Vietnamese, English, Japanese) through the installation menu.",
-  "featureDescription4": "Display information formatted in the selected language/area (for example: currency, date/hour, phone number).",
+  "@featureDescription3": {
+    "description": "Feature description 3"
+  },
+  "featureDescription4": "Display information formatted in the selected language/area (for example: currency, date/hour,phone number).",
+  "@featureDescription4": {
+    "description": "Feature description 4"
+  },
   "featureDescription5": "Beautiful interface with illustrations.",
+  "@featureDescription5": {
+    "description": "Feature description 5"
+  },
   "developerDescription": "Our group is passionate about creating user friendly and creative applications to enhance your travel experience.We hope this application will help you explore the world easily and conveniently.",
+  "@developerDescription": {
+    "description": "Developer description"
+  },
   "thankYou": "Thank you for using our application!",
+  "@thankYou": {
+    "description": "Thank you message"
+  },
   "tutorialAppBar": "Instructions for use",
+  "@tutorialAppBar": {
+    "description": "Title of tutorial Appbar"
+  },
   "tutorialTitle": "Application user manual",
+  "@tutorialTitle": {
+    "description": "Title of tutorial"
+  },
   "tutorialSection": "How to use the application",
+  "@tutorialSection": {
+    "description": "Section of tutorial"
+  },
   "hintSearchText": "Find questions",
+  "@hintSearchText": {
+    "description": "Hint text of search bar"
+  },
   "faqSection": "See common questions",
+  "@faqSection": {
+    "description": "Section of FAQ"
+  },
   "findByCatogarySection": "Search by section",
+  "@findByCatogarySection": {
+    "description": "Section of search by category"
+  },
   "faqQuestion1": "What information does the application provide?",
+  "@faqQuestion1": {
+    "description": "Question 1"
+  },
   "faqAnswer1": "The application provides information about tourist destinations, including descriptions, fare, opening hours and contact information.",
+  "@faqAnswer1": {
+    "description": "Answer 1"
+  },
   "faqQuestion2": "How to convert language?",
+  "@faqQuestion2": {
+    "description": "Question 2"
+  },
   "faqAnswer2": "You can convert language via the installation menu or button on the interface.",
+  "@faqAnswer2": {
+    "description": "Answer 2"
+  },
   "faqQuestion3": "Is the display information format in language?",
+  "@faqQuestion3": {
+    "description": "Question 3"
+  },
   "faqAnswer3": "Yes, formats such as fares, date and time and phone numbers will be adjusted in the language/area you choose.",
+  "@faqAnswer3": {
+    "description": "Answer 3"
+  },
   "faqQuestion4": "What languages are the application support?",
+  "@faqQuestion4": {
+    "description": "Question 4"
+  },
   "faqAnswer4": "The application is supporting Vietnamese, English and Japanese.",
+  "@faqAnswer4": {
+    "description": "Answer 4"
+  },
   "faqQuestion5": "How can I see the details of the location?",
-  "faqAnswer5": "You can click on a location on the list to see details, including description, ticket price and opening hours."
+  "@faqQuestion5": {
+    "description": "Question 5"
+  },
+  "faqAnswer5": "You can click on a location on the list to see details, including description, ticket price and opening hours.",
+  "@faqAnswer5": {
+    "description": "Answer 5"
+  }
 }
