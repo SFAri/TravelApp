@@ -86,6 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _showLanguageSelectionDialog(SettingsProvider settingsProvider) {
     // Lấy locale hiện tại từ Provider để biết ngôn ngữ nào đang được chọn
     Locale currentLocale = settingsProvider.appLocale;
+    print('current locale ------- $currentLocale');
     String currentSelectedLanguage;
     switch (currentLocale.languageCode) {
       case 'en':
@@ -96,8 +97,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             AppLocalizations.of(context)!.vietnameseLanguage;
         break;
       case 'ja':
+        
         currentSelectedLanguage =
             AppLocalizations.of(context)!.japaneseLanguage;
+        print('ENTER JA ---- $currentSelectedLanguage');
         break;
       default:
         currentSelectedLanguage = AppLocalizations.of(context)!.englishLanguage;

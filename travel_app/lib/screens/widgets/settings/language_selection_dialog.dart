@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/providers/settings_provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class LanguageSelectionDialog extends StatelessWidget {
   final List<String> languages;
@@ -32,13 +34,11 @@ class LanguageSelectionDialog extends StatelessWidget {
                       : null,
               onTap: () {
                 Locale newLocale;
-                if (languageName.contains('English')) {
+                if (languageName == AppLocalizations.of(context)!.englishLanguage) {
                   newLocale = const Locale('en');
-                } else if (languageName.contains('Vietnamese') ||
-                    languageName.contains('Tiếng Việt')) {
+                } else if (languageName == AppLocalizations.of(context)!.vietnameseLanguage) {
                   newLocale = const Locale('vi');
-                } else if (languageName.contains('Japanese') ||
-                    languageName.contains('日本語')) {
+                } else if (languageName==AppLocalizations.of(context)!.japaneseLanguage) {
                   newLocale = const Locale('ja');
                 } else {
                   newLocale = const Locale('en');
