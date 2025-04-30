@@ -62,17 +62,17 @@ class Formatters {
   static String _getCurrencySymbol(String currencyCode) {
     switch (currencyCode) {
       case 'USD':
-        return '\$';
+        return '\$ ';
       case 'VND':
-        return '₫';
+        return '₫ ';
       case 'JPY':
-        return '¥';
+        return '¥ ';
       case 'KRW':
-        return '₩';
+        return '₩ ';
       case 'AED':
-        return 'د.إ';
+        return 'AED ';
       default:
-        return '\$'; // Mặc định là USD
+        return '\$ '; // Mặc định là USD
     }
   }
 
