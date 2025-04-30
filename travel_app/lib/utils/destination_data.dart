@@ -5,8 +5,8 @@ import 'package:travel_app/utils/constants/image_string.dart';
 final List<Map<String, dynamic>> destinations = [
   // Danh mục Cultural
   {
-    'name': 'Ho Guom',
-    'description': 'A historic lake in Hanoi',
+    'nameKey': 'place_name_0',
+    'descriptionKey': 'place_desc_0',
     'price': 0.4, // 10000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0123456789',
@@ -14,8 +14,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Thang Long Water Puppet Theatre',
-    'description': 'A unique cultural performance in Hanoi',
+    'nameKey': 'place_name_1',
+    'descriptionKey': 'place_desc_1',
     'price': 0.8, // 20000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0987654321',
@@ -23,8 +23,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'My Son Sanctuary',
-    'description': 'Ancient Hindu temples in Quang Nam',
+    'nameKey': 'place_name_2',
+    'descriptionKey': 'place_desc_2',
     'price': 1.2, // 30000 VNĐ
     'openTime': '2025-04-26 10:00',
     'phone': '0212345678',
@@ -32,8 +32,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Imperial City of Hue',
-    'description': 'The former capital of Vietnam',
+    'nameKey': 'place_name_3',
+    'descriptionKey': 'place_desc_3',
     'price': 0.6, // 15000 VNĐ
     'openTime': '2025-04-26 07:30',
     'phone': '0312345678',
@@ -41,8 +41,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Cu Chi Tunnels',
-    'description': 'Historic tunnels used during the Vietnam War',
+    'nameKey': 'place_name_4',
+    'descriptionKey': 'place_desc_4',
     'price': 0.8, // 20000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0456789123',
@@ -50,8 +50,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'War Remnants Museum',
-    'description': 'A museum showcasing Vietnam War history',
+    'nameKey': 'place_name_5',
+    'descriptionKey': 'place_desc_5',
     'price': 1.0, // 25000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '1234567890',
@@ -59,8 +59,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Temple of Literature',
-    'description': 'Vietnam\'s first national university in Hanoi',
+    'nameKey': 'place_name_6',
+    'descriptionKey': 'place_desc_6',
     'price': 0.72, // 18000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0981234567',
@@ -68,8 +68,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Ho Chi Minh Mausoleum',
-    'description': 'The resting place of President Ho Chi Minh',
+    'nameKey': 'place_name_7',
+    'descriptionKey': 'place_desc_7',
     'price': 0.68, // 17000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0123456789',
@@ -77,8 +77,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Mekong Delta',
-    'description': 'A vast waterway region in southern Vietnam',
+    'nameKey': 'place_name_8',
+    'descriptionKey': 'place_desc_8',
     'price': 0.88, // 22000 VNĐ
     'openTime': '2025-04-26 07:30',
     'phone': '0987654321',
@@ -86,8 +86,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Cultural',
   },
   {
-    'name': 'Phu Van Lau',
-    'description': 'A historic pavilion in Hue',
+    'nameKey': 'place_name_9',
+    'descriptionKey': 'place_desc_9',
     'price': 0.56, // 14000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0212345678',
@@ -97,8 +97,8 @@ final List<Map<String, dynamic>> destinations = [
 
   // Danh mục Historical
   {
-    'name': 'Tuong Nu Than Tu Do',
-    'description': 'A symbol of freedom in the USA',
+    'nameKey': 'place_name_10',
+    'descriptionKey': 'place_desc_10',
     'price': 1.2, // 30000 VNĐ
     'openTime': '2025-04-26 10:00',
     'phone': '0212345678',
@@ -106,8 +106,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Cu Chi Tunnels',
-    'description': 'Historic tunnels used during the Vietnam War',
+    'nameKey': 'place_name_4',
+    'descriptionKey': 'place_desc_4',
     'price': 0.8, // 20000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0123456789',
@@ -115,8 +115,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Ho Chi Minh City Post Office',
-    'description': 'A beautiful historical building in HCMC',
+    'nameKey': 'place_name_12',
+    'descriptionKey': 'place_desc_12',
     'price': 0.6, // 15000 VNĐ
     'openTime': '2025-04-26 08:30',
     'phone': '0987654321',
@@ -124,8 +124,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Reunification Palace',
-    'description': 'The site of the end of the Vietnam War',
+    'nameKey': 'place_name_13',
+    'descriptionKey': 'place_desc_13',
     'price': 1.0, // 25000 VNĐ
     'openTime': '2025-04-26 07:00',
     'phone': '0212345678',
@@ -133,8 +133,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Hoa Lo Prison',
-    'description': 'A former prison used during the Vietnam War',
+    'nameKey': 'place_name_14',
+    'descriptionKey': 'place_desc_14',
     'price': 0.88, // 22000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0345678901',
@@ -142,8 +142,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Bac Ha Market',
-    'description': 'A vibrant market in the north of Vietnam',
+    'nameKey': 'place_name_15',
+    'descriptionKey': 'place_desc_15',
     'price': 0.72, // 18000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0456789123',
@@ -151,8 +151,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Saigon Notre-Dame Basilica',
-    'description': 'A famous cathedral in Ho Chi Minh City',
+    'nameKey': 'place_name_16',
+    'descriptionKey': 'place_desc_16',
     'price': 0.56, // 14000 VNĐ
     'openTime': '2025-04-26 09:30',
     'phone': '0987654321',
@@ -160,8 +160,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'Lang Co Beach',
-    'description': 'A beautiful beach in Vietnam',
+    'nameKey': 'place_name_17',
+    'descriptionKey': 'place_desc_17',
     'price': 0.8, // 20000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0123456789',
@@ -169,8 +169,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Historical',
   },
   {
-    'name': 'My Lai Massacre Memorial',
-    'description': 'A memorial for the victims of the My Lai Massacre',
+    'nameKey': 'place_name_18',
+    'descriptionKey': 'place_desc_18',
     'price': 0.64, // 16000 VNĐ
     'openTime': '2025-04-26 08:30',
     'phone': '0345678901',
@@ -180,8 +180,8 @@ final List<Map<String, dynamic>> destinations = [
 
   // Danh mục Nature
   {
-    'name': 'Vinh Ha Long',
-    'description': 'A natural wonder of the world',
+    'nameKey': 'place_name_19',
+    'descriptionKey': 'place_desc_19',
     'price': 1.0, // 25000 VNĐ
     'openTime': '2025-04-26 08:30',
     'phone': '0345678901',
@@ -189,8 +189,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Phong Nha-Ke Bang National Park',
-    'description': 'Famous for its stunning caves and biodiversity',
+    'nameKey': 'place_name_20',
+    'descriptionKey': 'place_desc_20',
     'price': 1.2, // 30000 VNĐ
     'openTime': '2025-04-26 07:00',
     'phone': '0456789123',
@@ -198,8 +198,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Ba Na Hills',
-    'description': 'A popular tourist destination with stunning views',
+    'nameKey': 'place_name_21',
+    'descriptionKey': 'place_desc_21',
     'price': 1.0, // 25000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0123456789',
@@ -207,8 +207,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Cat Ba Island',
-    'description': 'A beautiful island in Ha Long Bay',
+    'nameKey': 'place_name_22',
+    'descriptionKey': 'place_desc_22',
     'price': 1.8, // 45000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0987654321',
@@ -216,8 +216,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Tam Coc',
-    'description': 'A scenic area with stunning rice paddies',
+    'nameKey': 'place_name_23',
+    'descriptionKey': 'place_desc_23',
     'price': 2.4, // 60000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0212345678',
@@ -225,8 +225,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Sapa',
-    'description': 'Famous for its terraced rice fields and ethnic minorities',
+    'nameKey': 'place_name_24',
+    'descriptionKey': 'place_desc_24',
     'price': 1.4, // 35000 VNĐ
     'openTime': '2025-04-26 10:00',
     'phone': '0345678901',
@@ -234,8 +234,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Mui Ne Sand Dunes',
-    'description': 'Stunning sand dunes in Southern Vietnam',
+    'nameKey': 'place_name_25',
+    'descriptionKey': 'place_desc_25',
     'price': 2.0, // 50000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0456789123',
@@ -243,8 +243,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Nha Trang Beach',
-    'description': 'A famous beach destination in Vietnam',
+    'nameKey': 'place_name_26',
+    'descriptionKey': 'place_desc_26',
     'price': 2.8, // 70000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0123456789',
@@ -252,8 +252,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Nature',
   },
   {
-    'name': 'Bai Tu Long Bay',
-    'description': 'A beautiful bay near Ha Long Bay',
+    'nameKey': 'place_name_27',
+    'descriptionKey': 'place_desc_27',
     'price': 1.6, // 40000 VNĐ
     'openTime': '2025-04-26 07:30',
     'phone': '0987654321',
@@ -263,8 +263,8 @@ final List<Map<String, dynamic>> destinations = [
 
   // Danh mục Entertainment
   {
-    'name': 'Suoi Tien Theme Park',
-    'description': 'A cultural theme park in Ho Chi Minh City',
+    'nameKey': 'place_name_28',
+    'descriptionKey': 'place_desc_28',
     'price': 2.4, // 60000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0123456789',
@@ -272,8 +272,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Vinpearl Land',
-    'description': 'An amusement park in Nha Trang',
+    'nameKey': 'place_name_29',
+    'descriptionKey': 'place_desc_29',
     'price': 2.2, // 55000 VNĐ
     'openTime': '2025-04-26 09:30',
     'phone': '0987654321',
@@ -281,8 +281,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Dai Nam Wonderland',
-    'description': 'A large amusement park in Binh Duong',
+    'nameKey': 'place_name_30',
+    'descriptionKey': 'place_desc_30',
     'price': 2.8, // 70000 VNĐ
     'openTime': '2025-04-26 10:00',
     'phone': '0212345678',
@@ -290,8 +290,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Saigon River Dinner Cruise',
-    'description': 'Enjoy dinner while cruising on the Saigon River',
+    'nameKey': 'place_name_31',
+    'descriptionKey': 'place_desc_31',
     'price': 3.2, // 80000 VNĐ
     'openTime': '2025-04-26 08:00',
     'phone': '0345678901',
@@ -299,8 +299,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Rooftop Bar in HCMC',
-    'description': 'Enjoy drinks with a view of the city',
+    'nameKey': 'place_name_32',
+    'descriptionKey': 'place_desc_32',
     'price': 2.0, // 50000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0123456789',
@@ -308,8 +308,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Bui Vien Street',
-    'description': 'A famous nightlife street in Ho Chi Minh City',
+    'nameKey': 'place_name_33',
+    'descriptionKey': 'place_desc_33',
     'price': 1.6, // 40000 VNĐ
     'openTime': '2025-04-26 10:00',
     'phone': '0987654321',
@@ -317,8 +317,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Water Puppet Show',
-    'description': 'A traditional Vietnamese art show',
+    'nameKey': 'place_name_34',
+    'descriptionKey': 'place_desc_34',
     'price': 1.8, // 45000 VNĐ
     'openTime': '2025-04-26 08:30',
     'phone': '0212345678',
@@ -326,8 +326,8 @@ final List<Map<String, dynamic>> destinations = [
     'category': 'Entertainment',
   },
   {
-    'name': 'Lotus Water Park',
-    'description': 'A water park in Hanoi',
+    'nameKey': 'place_name_35',
+    'descriptionKey': 'place_desc_35',
     'price': 1.4, // 35000 VNĐ
     'openTime': '2025-04-26 09:00',
     'phone': '0345678901',
