@@ -10,6 +10,7 @@ import 'package:travel_app/screens/widgets/settings/language_selection_dialog.da
 import 'package:travel_app/screens/widgets/settings/menu_setting_section.dart';
 import 'package:travel_app/screens/widgets/settings/menu_setting_title.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:travel_app/screens/widgets/settings/theme_selection_dialog.dart';
 import 'package:travel_app/utils/formaters.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -22,6 +23,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   late List<String> languages;
   late List<String> currencies;
+  late List<String> themes;
   late Map<String, String> availableDateFormats;
   final DateTime sampleDate = DateTime.parse("2025-12-31 00:00:00");
 
@@ -32,9 +34,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
       AppLocalizations.of(context)!.englishLanguage,
       AppLocalizations.of(context)!.vietnameseLanguage,
       AppLocalizations.of(context)!.japaneseLanguage,
+      AppLocalizations.of(context)!.koreanLanguage,
     ];
 
     currencies = ["VND", "USD", "JPY", "KRW"];
+    themes = ["Light", "Dark", "System"];
 
     final localeString = Localizations.localeOf(context).toString();
 
@@ -100,8 +104,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         currentSelectedLanguage =
             AppLocalizations.of(context)!.japaneseLanguage;
       case 'ko':
-        currentSelectedLanguage =
-            AppLocalizations.of(context)!.koreanLanguage;
+        currentSelectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
         break;
       default:
         currentSelectedLanguage = AppLocalizations.of(context)!.englishLanguage;
@@ -151,6 +154,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // Dialog chọn them mode
+  void _showThemeModeSelectionDialog(SettingsProvider settingsProvider) {
+    showModalBottomSheet(
+      context: context,
+      builder:
+          (context) => ThemeSelectionDialog(
+            themes: themes,
+            selectedTheme: settingsProvider.selectedTheme,
+            onThemeSelected: (theme) {
+              setState(() {
+                settingsProvider.changeTheme(theme);
+              });
+            },
+          ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // Lắng nghe thay đổi từ SettingsProvider
@@ -178,7 +198,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         break;
     }
 
-    bool enableNotifications = true;
+    bool enableNotifications = false;
 
     return Container(
       color: Colors.grey[200],
@@ -252,8 +272,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             icon: Icons.format_paint,
                             title:
                                 AppLocalizations.of(context)!.chooseThemeButton,
-                            subtitle: 'Dark Mode',
-                            onTap: () {},
+                            subtitle: settingsProvider.selectedTheme,
+                            onTap:
+                                () => _showThemeModeSelectionDialog(
+                                  context.read<SettingsProvider>(),
+                                ),
                           ),
                         ],
                       ),
@@ -275,7 +298,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 )!.chooseNotificationButton,
                             hasSwitch: true,
                             switchValue: enableNotifications,
-                            onSwitchChanged: (value) {},
+                            onSwitchChanged: (value) {
+                              setState(() {
+                                enableNotifications = value;
+                              });
+                            },
                           ),
                         ],
                       ),

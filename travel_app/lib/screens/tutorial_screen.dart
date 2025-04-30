@@ -108,6 +108,8 @@ class TutorialScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                         side: BorderSide(color: Colors.white, width: 1.0),
                       ),
+                      margin: const EdgeInsets.symmetric(vertical: 8.0),
+                      clipBehavior: Clip.antiAlias,
                       child: ExpansionTile(
                         title: Text(
                           item['question']!,

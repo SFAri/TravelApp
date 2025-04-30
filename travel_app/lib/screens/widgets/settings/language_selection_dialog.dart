@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/providers/settings_provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

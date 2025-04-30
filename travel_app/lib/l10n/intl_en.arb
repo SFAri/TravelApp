@@ -130,7 +130,7 @@
   "@chooseNotificationButton": {
     "description": "Choose notification mode text button"
   },
-  "chooseReportButton": "Leave report",
+  "chooseReportButton": "Feedback",
   "@chooseReportButton": {
     "description": "Choose report text button"
   },

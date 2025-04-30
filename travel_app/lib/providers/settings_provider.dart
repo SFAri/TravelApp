@@ -6,15 +6,18 @@ class SettingsProvider with ChangeNotifier {
   String _selectedCurrency = 'USD'; // Tiền tệ mặc định
   // Định dạng ngày giờ mặc định
   String _selectedDateFormatPattern = 'MM/dd/yyyy HH:mm';
+  String _selectedTheme = 'System';
 
   // Tạo các key để lưu SharedPreferences
   static const String _currencyKey = 'selected_currency';
   static const String _localeKey = 'selected_locale';
   static const String _dateFormatKey = 'dateFormatPattern';
+  static const String _themeKey = 'selected_theme';
 
   Locale get appLocale => _appLocale;
   String get selectedCurrency => _selectedCurrency;
   String get selectedDateFormatPattern => _selectedDateFormatPattern;
+  String get selectedTheme => _selectedTheme;
 
   SettingsProvider() {
     _loadSettings(); // Tải các setting khi khởi tạo
@@ -33,6 +36,7 @@ class SettingsProvider with ChangeNotifier {
     _selectedDateFormatPattern =
         prefs.getString(_dateFormatKey) ?? 'MM/dd/yyyy HH:mm';
 
+    _selectedTheme = prefs.getString(_themeKey) ?? 'System';
     notifyListeners();
   }
 
@@ -42,6 +46,7 @@ class SettingsProvider with ChangeNotifier {
     await prefs.setString(_currencyKey, _selectedCurrency);
     await prefs.setString(_localeKey, _appLocale.languageCode);
     await prefs.setString(_dateFormatKey, _selectedDateFormatPattern);
+    await prefs.setString(_themeKey, _selectedTheme);
   }
 
   void changeLocale(Locale newLocale) {
@@ -61,6 +66,13 @@ class SettingsProvider with ChangeNotifier {
   void changeDateFormat(String newDateFormat) {
     if (_selectedDateFormatPattern == newDateFormat) return;
     _selectedDateFormatPattern = newDateFormat;
+    _saveSettings();
+    notifyListeners();
+  }
+
+  void changeTheme(String newTheme) {
+    if (_selectedTheme == newTheme) return;
+    _selectedTheme = newTheme;
     _saveSettings();
     notifyListeners();
   }
