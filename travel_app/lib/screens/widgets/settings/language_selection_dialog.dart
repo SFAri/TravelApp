@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class LanguageSelectionDialog extends StatelessWidget {
   final List<String> languages;
   final String currentLanguage;
@@ -33,14 +32,21 @@ class LanguageSelectionDialog extends StatelessWidget {
                       : null,
               onTap: () {
                 Locale newLocale;
-                if (languageName == AppLocalizations.of(context)!.englishLanguage) {
+                if (languageName ==
+                    AppLocalizations.of(context)!.englishLanguage) {
                   newLocale = const Locale('en');
-                } else if (languageName == AppLocalizations.of(context)!.vietnameseLanguage) {
+                } else if (languageName ==
+                    AppLocalizations.of(context)!.vietnameseLanguage) {
                   newLocale = const Locale('vi');
-                } else if (languageName==AppLocalizations.of(context)!.japaneseLanguage) {
+                } else if (languageName ==
+                    AppLocalizations.of(context)!.japaneseLanguage) {
                   newLocale = const Locale('ja');
-                } else if (languageName==AppLocalizations.of(context)!.koreanLanguage) {
+                } else if (languageName ==
+                    AppLocalizations.of(context)!.koreanLanguage) {
                   newLocale = const Locale('ko');
+                } else if (languageName ==
+                    AppLocalizations.of(context)!.arabicLanguage) {
+                  newLocale = const Locale('ar');
                 } else {
                   newLocale = const Locale('en');
                 }

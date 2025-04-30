@@ -35,9 +35,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
       AppLocalizations.of(context)!.vietnameseLanguage,
       AppLocalizations.of(context)!.japaneseLanguage,
       AppLocalizations.of(context)!.koreanLanguage,
+      AppLocalizations.of(context)!.arabicLanguage,
     ];
 
-    currencies = ["VND", "USD", "JPY", "KRW"];
+    currencies = ["VND", "USD", "JPY", "KRW", "AED"];
     themes = ["Light", "Dark", "System"];
 
     final localeString = Localizations.localeOf(context).toString();
@@ -91,25 +92,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     // Lấy locale hiện tại từ Provider để biết ngôn ngữ nào đang được chọn
     Locale currentLocale = settingsProvider.appLocale;
     print('current locale ------- $currentLocale');
-    String currentSelectedLanguage;
-    switch (currentLocale.languageCode) {
-      case 'en':
-        currentSelectedLanguage = AppLocalizations.of(context)!.englishLanguage;
-        break;
-      case 'vi':
-        currentSelectedLanguage =
-            AppLocalizations.of(context)!.vietnameseLanguage;
-        break;
-      case 'ja':
-        currentSelectedLanguage =
-            AppLocalizations.of(context)!.japaneseLanguage;
-      case 'ko':
-        currentSelectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
-        break;
-      default:
-        currentSelectedLanguage = AppLocalizations.of(context)!.englishLanguage;
-        break;
-    }
+    String currentSelectedLanguage = getLanguageSelected(settingsProvider);
 
     showModalBottomSheet(
       context: context,
@@ -171,6 +154,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
+  // Hàm lấy tên ngôn ngữ được chọn
+  String getLanguageSelected(SettingsProvider settingsProvider) {
+    String selectedLanguage;
+
+    switch (settingsProvider.appLocale.languageCode) {
+      case 'en':
+        selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
+        break;
+      case 'vi':
+        selectedLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
+        break;
+      case 'ja':
+        selectedLanguage = AppLocalizations.of(context)!.japaneseLanguage;
+        break;
+      case 'ko':
+        selectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
+        break;
+      case 'ar':
+        selectedLanguage = AppLocalizations.of(context)!.arabicLanguage;
+        break;
+      default:
+        selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
+        break;
+    }
+
+    return selectedLanguage;
+  }
+
   @override
   Widget build(BuildContext context) {
     // Lắng nghe thay đổi từ SettingsProvider
@@ -179,25 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     final selectedPattern = settingsProvider.selectedDateFormatPattern;
 
     // Xác định tên ngôn ngữ hiển thị dựa trên locale từ Provider
-    String displayLanguage;
-    switch (settingsProvider.appLocale.languageCode) {
-      case 'en':
-        displayLanguage = AppLocalizations.of(context)!.englishLanguage;
-        break;
-      case 'vi':
-        displayLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
-        break;
-      case 'ja':
-        displayLanguage = AppLocalizations.of(context)!.japaneseLanguage;
-        break;
-      case 'ko':
-        displayLanguage = AppLocalizations.of(context)!.koreanLanguage;
-        break;
-      default:
-        displayLanguage = AppLocalizations.of(context)!.englishLanguage;
-        break;
-    }
-
+    String displayLanguage = getLanguageSelected(settingsProvider);
     bool enableNotifications = false;
 
     return Container(

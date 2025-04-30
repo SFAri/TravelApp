@@ -6,5 +6,6 @@ class L10n {
     const Locale('vi'),
     const Locale('ja'),
     const Locale('ko'),
+    const Locale('ar'),
   ];
 }

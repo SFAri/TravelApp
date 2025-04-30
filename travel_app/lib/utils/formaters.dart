@@ -69,6 +69,8 @@ class Formatters {
         return '¥';
       case 'KRW':
         return '₩';
+      case 'AED':
+        return 'د.إ';
       default:
         return '\$'; // Mặc định là USD
     }
@@ -77,10 +79,13 @@ class Formatters {
   static double convertCurrency(double priceInUsd, String targetCurrency) {
     const double vndToUsdRate = 0.000038; // Tỉ giá USD sang USD
     const double jpyToUsdRate = 0.007; // Tỉ giá Yên Nhật sang USD
-    const double krwToUsdRate = 0.00070;
+    const double krwToUsdRate = 0.00070; // Tỉ giá Won Hàn sang USD
+    const double aedToUsdRate =
+        0.27; // Tỉ giá Dirham Các tiểu vương quốc Ả rập sang USD
     const double usdToVndRate = 1 / vndToUsdRate;
     const double usdToJpyRate = 1 / jpyToUsdRate;
-    const double usdToKrwRate = 1/krwToUsdRate;
+    const double usdToKrwRate = 1 / krwToUsdRate;
+    const double usdToAedRate = 1 / aedToUsdRate;
 
     double convertedAmount;
     // Thực hiện chuyển đổi
@@ -90,6 +95,8 @@ class Formatters {
       convertedAmount = priceInUsd * usdToJpyRate;
     } else if (targetCurrency == 'KRW') {
       convertedAmount = priceInUsd * usdToKrwRate;
+    } else if (targetCurrency == 'AED') {
+      convertedAmount = priceInUsd * usdToAedRate;
     } else if (targetCurrency == 'USD') {
       convertedAmount = priceInUsd;
     } else {

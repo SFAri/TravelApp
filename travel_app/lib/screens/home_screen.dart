@@ -5,12 +5,12 @@ import 'package:travel_app/providers/settings_provider.dart';
 import 'package:travel_app/screens/destination_detail.dart';
 import 'package:travel_app/screens/search_screen.dart';
 import 'package:travel_app/screens/settings_screen.dart';
+import 'package:travel_app/screens/widgets/settings/language_selection_dialog.dart';
 import 'package:travel_app/utils/constants/image_string.dart';
 import 'package:travel_app/utils/destination_data.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
-
   const HomeScreen({super.key});
 
   @override
@@ -18,11 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   late CarouselSliderController controller;
   late int selected;
+  late List<String> languages;
   final TextEditingController _searchController = TextEditingController();
-  String? _selectedLanguage;
 
   @override
   void initState() {
@@ -34,17 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    Locale currentLocale = Localizations.localeOf(context);
-    if (currentLocale.languageCode == 'en') {
-      _selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
-    } else if (currentLocale.languageCode == 'vi') {
-      _selectedLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
-    } else if (currentLocale.languageCode == 'ja') {
-      _selectedLanguage = AppLocalizations.of(context)!.japaneseLanguage;
-    } else if (currentLocale.languageCode == 'ko') {
-      _selectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
-    }
-    
+    languages = [
+      AppLocalizations.of(context)!.englishLanguage,
+      AppLocalizations.of(context)!.vietnameseLanguage,
+      AppLocalizations.of(context)!.japaneseLanguage,
+      AppLocalizations.of(context)!.koreanLanguage,
+      AppLocalizations.of(context)!.arabicLanguage,
+    ];
   }
 
   @override
@@ -54,62 +49,50 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showLanguageSelectionDialog(SettingsProvider settingsProvider) {
+    // Lấy locale hiện tại từ Provider để biết ngôn ngữ nào đang được chọn
+    Locale currentLocale = settingsProvider.appLocale;
+    print('current locale ------- $currentLocale');
+    String currentSelectedLanguage = getLanguageSelected(settingsProvider);
+
     showModalBottomSheet(
       context: context,
-      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(16))),
-      builder: (context) {
-
-        return Container(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 10),
-              ListTile(
-                title: Text(AppLocalizations.of(context)!.englishLanguage),
-                trailing: _selectedLanguage == AppLocalizations.of(context)!.englishLanguage
-                  ? const Icon(Icons.check, color: Colors.blue)
-                  : null,
-                onTap: () {
-                  settingsProvider.changeLocale(const Locale('en')); // Change locale to English
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text(AppLocalizations.of(context)!.vietnameseLanguage),
-                trailing: _selectedLanguage == AppLocalizations.of(context)!.vietnameseLanguage
-                  ? const Icon(Icons.check, color: Colors.blue)
-                  : null,
-                onTap: () {
-                  settingsProvider.changeLocale(const Locale('vi')); // Change locale to Vietnamese
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text(AppLocalizations.of(context)!.japaneseLanguage),
-                trailing: _selectedLanguage == AppLocalizations.of(context)!.japaneseLanguage
-                  ? const Icon(Icons.check, color: Colors.blue)
-                  : null,
-                onTap: () {
-                  settingsProvider.changeLocale(const Locale('ja')); // Change locale to Japanese
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text(AppLocalizations.of(context)!.koreanLanguage),
-                trailing: _selectedLanguage == AppLocalizations.of(context)!.koreanLanguage
-                  ? const Icon(Icons.check, color: Colors.blue)
-                  : null,
-                onTap: () {
-                  settingsProvider.changeLocale(const Locale('ko')); // Change locale to Japanese
-                  Navigator.pop(context);
-                },
-              ),
-            ],
+      builder:
+          (context) => LanguageSelectionDialog(
+            languages: languages,
+            currentLanguage: currentSelectedLanguage,
+            onLanguageSelected: (locale) {
+              settingsProvider.changeLocale(locale);
+            },
           ),
-        );
-      },
     );
+  }
+
+  // Hàm lấy tên ngôn ngữ được chọn
+  String getLanguageSelected(SettingsProvider settingsProvider) {
+    String selectedLanguage;
+
+    switch (settingsProvider.appLocale.languageCode) {
+      case 'en':
+        selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
+        break;
+      case 'vi':
+        selectedLanguage = AppLocalizations.of(context)!.vietnameseLanguage;
+        break;
+      case 'ja':
+        selectedLanguage = AppLocalizations.of(context)!.japaneseLanguage;
+        break;
+      case 'ko':
+        selectedLanguage = AppLocalizations.of(context)!.koreanLanguage;
+        break;
+      case 'ar':
+        selectedLanguage = AppLocalizations.of(context)!.arabicLanguage;
+        break;
+      default:
+        selectedLanguage = AppLocalizations.of(context)!.englishLanguage;
+        break;
+    }
+
+    return selectedLanguage;
   }
 
   @override
@@ -131,16 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
               // Navigate to settings screen
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => SettingsScreen(),
-                ),
+                MaterialPageRoute(builder: (_) => SettingsScreen()),
               );
             },
           ),
         ],
       ),
       body: SingleChildScrollView(
-        // physics: AlwaysScrollableScrollPhysics(),       
+        // physics: AlwaysScrollableScrollPhysics(),
         padding: EdgeInsets.all(10),
         scrollDirection: Axis.vertical,
         child: Column(
@@ -159,21 +140,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.hintSearchbar,
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)
-                      )
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                   ),
                 ),
                 IconButton(
-                  onPressed: (){
+                  onPressed: () {
                     String searchValue = _searchController.text;
                     Navigator.push(
-                      context, 
-                      MaterialPageRoute(builder: (context) => SearchScreen(query: searchValue)),
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SearchScreen(query: searchValue),
+                      ),
                     );
-                  }, 
-                  icon: Icon(Icons.search)
-                )
+                  },
+                  icon: Icon(Icons.search),
+                ),
               ],
             ),
 
@@ -192,68 +175,71 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               items: [
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.waterPuppetShow))
+                    child: Image(image: AssetImage(CImages.waterPuppetShow)),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.haLong))
+                    child: Image(image: AssetImage(CImages.haLong)),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.hue))
+                    child: Image(image: AssetImage(CImages.hue)),
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image(image: AssetImage(CImages.baNa))
+                    child: Image(image: AssetImage(CImages.baNa)),
                   ),
                 ),
-              ]
+              ],
             ),
 
             // Indicators:
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
-              children: List.generate(
-                3, 
-                (index) {
-                  bool isCurrent = selected == index;
-                  return GestureDetector(
-                    onTap: () {
-                      controller.animateToPage(index);
-                    },
-                    child: AnimatedContainer(
-                      width: isCurrent ? 55 : 17,
-                      height: 10,
-                      margin: EdgeInsets.symmetric(horizontal: isCurrent ? 6 : 3),
-                      duration: Duration(milliseconds: 300),
-                      decoration: BoxDecoration(
-                        color: isCurrent ? Colors.blue.shade200 : Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(12)
-                      ),
+              children: List.generate(3, (index) {
+                bool isCurrent = selected == index;
+                return GestureDetector(
+                  onTap: () {
+                    controller.animateToPage(index);
+                  },
+                  child: AnimatedContainer(
+                    width: isCurrent ? 55 : 17,
+                    height: 10,
+                    margin: EdgeInsets.symmetric(horizontal: isCurrent ? 6 : 3),
+                    duration: Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                      color:
+                          isCurrent
+                              ? Colors.blue.shade200
+                              : Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(12),
                     ),
-                  );
-                }  
-              ),
+                  ),
+                );
+              }),
             ),
 
             Row(
               spacing: 10,
               children: [
-                Text(AppLocalizations.of(context)!.popularPlaces, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
-                Divider(thickness: 2, height: 2, color: Colors.grey,)
+                Text(
+                  AppLocalizations.of(context)!.popularPlaces,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Divider(thickness: 2, height: 2, color: Colors.grey),
               ],
             ),
 
@@ -267,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ListTile(
                       leading: SizedBox(
                         width: 80,
-                        child: Image.asset(destinations[index]['imageUrl']!)
+                        child: Image.asset(destinations[index]['imageUrl']!),
                       ),
                       title: Text(destinations[index]['name']!),
                       subtitle: Text(destinations[index]['description']!),
@@ -275,9 +261,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DestinationDetailScreen(
-                              destination: destinations[index],
-                            ),
+                            builder:
+                                (context) => DestinationDetailScreen(
+                                  destination: destinations[index],
+                                ),
                           ),
                         );
                       },
@@ -290,10 +277,13 @@ class _HomeScreenState extends State<HomeScreen> {
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: (){},
-                child: Text(AppLocalizations.of(context)!.viewButton, style: TextStyle(color: Colors.blue),),
+                onPressed: () {},
+                child: Text(
+                  AppLocalizations.of(context)!.viewButton,
+                  style: TextStyle(color: Colors.blue),
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -57,9 +57,9 @@
     "placeholders": {
       "value": {
         "type": "int",
-        "format" : "compactCurrency",
-        "optionalParameters" : {
-          "decimalDigits" : 2
+        "format": "compactCurrency",
+        "optionalParameters": {
+          "decimalDigits": 2
         }
       }
     }
@@ -157,6 +157,10 @@
   "koreanLanguage": "Korean",
   "@englishLanguage": {
     "description": "Title Korean language"
+  },
+  "arabicLanguage": "Arabic",
+  "@arabicLanguage": {
+    "description": "Title Arabic language"
   },
   "noValue": "No matching destinations found",
   "@noValue": {
